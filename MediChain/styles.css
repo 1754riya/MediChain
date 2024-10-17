@@ -1,0 +1,405 @@
+/* General styling */
+* {
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+  
+  a {
+    text-decoration: none;
+    color: black;
+  }
+  
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Colors */
+  :root {
+    --green: #3ed1cc;
+    --red: #ec2c82;
+    --grey: #999;
+  }
+  
+  .container {
+    width: 960px;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+  .Heading {
+    font-size:80px;
+    font-style: bold;
+    color:white;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+  .Heading:hover{
+    color:#999;
+  }
+  
+  .main-header {
+    position: relative;
+    background-image: url(https://previews.123rf.com/images/michaeljung/michaeljung1302/michaeljung130200296/17781867-handsome-african-american-medical-doctor-with-colleagues-in-background.jpg);
+    background-size: cover;
+  }
+  
+  .main-header .menu {
+    display: none;
+  }
+  
+  .main-header .app-icons {
+    position: absolute;
+    max-width: 450px;
+    top: 40%;
+    right: 20px;
+    opacity: 0.4;
+  }
+  
+  .main-header .overlay {
+    background: rgba(62, 209, 204, 0.9);
+    padding: 0px 0px 80px 0px;
+  }
+  
+
+  
+  .container header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 0px;
+  }
+  
+  .container header .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .container header .logo img {
+    width: 50px;
+    margin-right: 10px;
+  }
+  
+  .container header .logo span {
+    font-size: 40px;
+    color: white;
+    width: 50px;
+  }
+  
+  .container header .nav a {
+    display: inline-block;
+  padding: 10px 2px;
+  background-color: grey;
+  color: white;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  transition: background-color 0.3s ease;
+  }
+
+  .button-nav:hover {
+    background-color: var(--red);
+    color: white;
+    cursor: pointer;
+  }
+  .container header .nav a.active {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+  }
+
+  
+  .content .content-wrapper {
+    width: 500px;
+  }
+  
+  .content .content-wrapper .SubHeading {
+    font-size: 40px;
+    font-weight: 300;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: left;
+    margin-bottom: 20px;
+    color: white;
+  }
+  
+  .content .content-wrapper .button-wrapper {
+    margin-top: 50px;
+    display: flex;
+  }
+  
+  .content .content-wrapper .button-wrapper .button {
+    margin-right: 20px;
+    padding: 25px 30px;
+    background: var(--red);
+    color: white;
+    text-transform: uppercase;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 2px;
+  }
+  
+  .content .content-wrapper .button-wrapper .button.ask {
+    background: rgba(0, 0, 0, 0.4);
+  }
+  
+  .content .content-wrapper .button-wrapper .button span {
+    margin-left: 20px;
+  }
+  .footer {
+    padding: 50px 0px;
+  }
+  
+  .col-wrapper {
+    display: flex;
+  }
+  
+  .col-wrapper .col-1 {
+    width: 50%;
+  }
+  .footer .col-1 span {
+    font-size: 35px; 
+    font-weight: bold;
+    text-align: left; 
+    color: #3ed1cc; 
+    transition: color 0.3s; 
+}
+
+.footer .col-1 span:hover {
+    color: black; /* Color on hover */
+}
+  .col-wrapper .col-1 li {
+    margin-bottom: 15px;
+  }
+  
+  .col-wrapper .col-1 li a {
+    font-size: 14px;
+    font-weight: 900;
+    color: var(--grey);
+    transition: all ease-in-out 300ms;
+  }
+  
+  .col-wrapper .col-1 li a:hover {
+    color: var(--green);
+  }
+  
+  .col-wrapper .col-1 li a.header {
+    color: black;
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  
+  /* Social Media */
+  #social-media {
+    padding: 30px 0px;
+  }
+  
+  #social-media .social-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  #social-media .social-wrapper .copyright {
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--grey);
+    letter-spacing: 2px;
+  }
+  
+  #social-media .social-wrapper .icons i {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    border: 1px solid var(--grey);
+    margin: 0px 10px;
+    border-radius: 50%;
+    line-height: 40px;
+    font-size: 20px;
+    color: var(--green);
+    cursor: pointer;
+    transition: all ease-in-out 300ms;
+  }
+  
+  #social-media .social-wrapper .icons i:hover {
+    background: var(--green);
+    color: white;
+    border: 1px solid white;
+  }
+  
+  #social-media .slug {
+    display: flex;
+    align-items: center;
+  }
+  
+  #social-media .slug span {
+    color: var(--grey);
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 900;
+  }
+  
+  #social-media .slug img {
+    width: 20px;
+    margin-left: 15px;
+  }
+  
+  /* How It Works Section */
+  #how-it-works {
+    padding: 100px 0px;
+  }
+  
+  #how-it-works .intro {
+    margin-bottom: 100px;
+    text-align: center;
+    font-size: 50px;
+    color: #3ed1cc;
+    align-items:center;
+  }
+  #how-it-works .intro:hover{
+    color: black;
+  }
+  
+  #how-it-works .intro span {
+    color: var(--green);
+    display: inline-block;
+    margin-left: 20px;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+  }
+  
+  #how-it-works .intro span i {
+    font-size: 10px;
+    margin-left: 10px;
+  }
+  #how-it-works .intro{
+    text-align: center;
+  }
+  
+  #how-it-works .slug {
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--grey);
+    letter-spacing: 2px;
+  }
+  
+  #how-it-works .title {
+    font-size: 50px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 20px;
+    color:#3ed1cc;
+  }
+
+  #how-it-works .title:hover {
+    color:Black;
+  }
+  
+  #how-it-works .content {
+    width: 740px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 0 auto 100px;
+    text-align: center;
+    font-size: 22px;
+    line-height: 1.4;
+  }
+  
+  #how-it-works .icon-wrapper {
+    display: flex;
+    justify-content: space-around;
+    width: 900px;
+    margin: 0 auto;
+    max-width: 95%;
+  }
+  
+  #how-it-works .icon-wrapper .icon {
+    text-align: center;
+  }
+  
+  #how-it-works .icon-wrapper .icon i {
+    display: inline-block;
+    width: 75px;
+    height: 75px;
+    margin-bottom: 15px;
+    line-height: 75px;
+    border-radius: 50%;
+    background: white;
+    font-size: 30px;
+    box-shadow: 0px 5px 10px 3px rgba(0, 0, 0, 0.2);
+    color: var(--green);
+    cursor: pointer;
+    transition: all ease-in-out 300ms;
+  }
+  
+  #how-it-works .icon-wrapper .icon i:hover {
+    background: var(--green);
+    color: white;
+  }
+  
+  #how-it-works .icon-wrapper .icon p {
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+  
+  /* Question Section */
+  #question {
+    background: var(--green);
+    padding: 150px 0px;
+  }
+  
+  #question .title {
+    font-size: 40px;
+    font-weight: 300;
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+  }
+  
+  #question .content {
+    width: 640px;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 1.2;
+    font-size: 18px;
+    margin-bottom: 80px;
+    color: white;
+  }
+  
+  #question .form {
+    width: 640px;
+    margin: 0 auto;
+    position: relative;
+  }
+  
+  #question .form input {
+    width: 100%;
+    padding: 20px 0px;
+    outline: none;
+    border: none;
+    text-indent: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 3px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  #question .form i {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    color: var(--green);
+  }
+  
