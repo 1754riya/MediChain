@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Profile - MediChain</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+
+    <header class="navbar">
+        <div class="navbar-logo">
+            <img src="logo.png" alt="MediChain Logo" class="logo">
+            <h1>MediChain</h1>
+        </div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Find Doctor</a>
+            <a href="#">About</a>
+            <a href="#">Contact Us</a>
+            <a href="#">App</a>
+            <button class="login-btn">Log in</button>
+            <button class="signup-btn">Sign up</button>
+        </nav>
+    </header>
+
+   
+    <div class="profile-container">
+        <section class="profile-header">
+            <div class="profile-image">
+                <img src="hero.png" alt="Doctor Profile">
+            </div>
+            <div class="profile-info">
+                <h2>Dr. Rayna Westervelt M.Psi</h2>
+                <p><i class="fas fa-stethoscope"></i> ENT Specialist</p>
+                <p><i class="fas fa-map-marker-alt"></i> Siloam Hospitals, West Bekasi, Bekasi</p>
+                <div class="additional-info">
+                    <span><i class="fas fa-clock"></i> Full-time</span>
+                    <span><i class="fas fa-wallet"></i> 250k - 350k</span>
+                    <span><i class="fas fa-star"></i> 94% Positive Rating</span>
+                </div>
+            </div>
+        </section>
+
+        
+        <div class="doctor-profile">
+            <h3>Doctor Profile</h3>
+            <div class="section-content collapsed">
+                <p>Dr. John Doe is a renowned cardiologist with over 15 years of experience. Her expertise includes advanced cardiac procedures and personalized patient care. She has received several awards for his contributions to the medical field.</p>
+                <p>Dr. Doe also conducts research on innovative techniques to improve heart health, actively participating in global conferences and seminars.</p>
+            </div>
+            <a class="toggle-info" onclick="toggleContent(this)">See More</a>
+        </div>
+        
+
+        <aside class="medical-actions">
+            <h3>Medical Actions</h3>
+            <ul>
+                <li><i class="fas fa-check-circle"></i> BERA (Brainstem Evoked Response Audiometry)</li>
+                <li><i class="fas fa-check-circle"></i> ENT Surgery</li>
+                <li><i class="fas fa-check-circle"></i> ENT Corpus Alienum Extraction</li>
+                <li><i class="fas fa-check-circle"></i> Ear Endoscopy</li>
+                <li><i class="fas fa-check-circle"></i> Ear Irrigation</li>
+                <li><i class="fas fa-check-circle"></i> Triloplasty</li>
+                <li><i class="fas fa-check-circle"></i> Hearing Test</li>
+            </ul>
+            <button class="appointment-btn">Make an Appointment</button>
+        </aside>
+
+        
+        <div class="practice-experience">
+            <h3>Practice Experience</h3>
+            <div class="experience">
+                <div class="experience-item">
+                    <h3>General Physician</h3>
+                    <p>5 years of experience providing comprehensive healthcare services.</p>
+                </div>
+                <div class="experience-item">
+                    <h3>Specialist in Cardiology</h3>
+                    <p>3 years of expertise in diagnosing and treating heart conditions.</p>
+                </div>
+                <div class="experience-item">
+                    <h3>Oncology Consultant</h3>
+                    <p>2 years of experience specializing in cancer treatment and care.</p>
+                </div>
+            </div>
+            <a href="#" class="appointment-btn">Book Appointment</a>
+        </div>
+        
+
+        
+        <section class="doctor-review">
+            <h3>Doctor's Reviews</h3>
+            <div class="reviews-container">
+                <div class="review-item">
+                    <p><strong>Makenna Schleifer</strong></p>
+                    <p class="date">20 January 2024 - 05:54</p>
+                    <p>"Excellent service, very knowledgeable, and took the time to explain everything thoroughly."</p>
+                </div>
+                <div class="review-item">
+                    <p><strong>John Doe</strong></p>
+                    <p class="date">15 January 2024 - 14:32</p>
+                    <p>"Professional and caring. Highly recommend for personalized care."</p>
+                </div>
+                <div class="review-item">
+                    <p><strong>Emma Smith</strong></p>
+                    <p class="date">10 January 2024 - 09:15</p>
+                    <p>"Great experience! The doctor was attentive and addressed all my concerns."</p>
+                </div>
+            </div>
+            <a href="all-reviews.html" class="view-all-btn">View All Reviews</a>
+        
+            
+
+            <div class="add-review">
+                <h4>Add Your Review</h4>
+                <form action="/submit-review" method="POST">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <textarea name="review" placeholder="Write your review..." rows="5" required></textarea>
+                    <button type="submit" class="submit-review-btn">Submit Review</button>
+                </form>
+            </div>
+        </section>
+        
+
+        
+        <div class="cta-container">
+            <p>Download the app and start your health journey</p>
+            <div class="button-container">
+              <a href="#" class="app-button app-store">App Store</a>
+              <a href="#" class="app-button google-play">Google Play</a>
+            
+          </div>
+          
+
+</body>
+</html>

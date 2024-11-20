@@ -1,0 +1,767 @@
+/* styles.css */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+/* Navbar CSS */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: #2c3e50;
+    font-size: 1.2em;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.navbar-logo .logo {
+    width: 100px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.navbar-logo .logo:hover {
+    transform: scale(1.1);
+    filter: brightness(0.9);
+}
+
+.navbar h1 {
+    color: #fff;
+    font-size: 2.2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.navbar nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.navbar nav a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar nav a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: #1abc9c;
+    transition: width 0.3s ease;
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+}
+
+.navbar nav a:hover {
+    color: #1abc9c;
+    transform: scale(1.05);
+}
+
+.navbar nav a:hover::after {
+    width: 100%;
+}
+
+.login-btn,
+.signup-btn {
+    padding: 10px 25px;
+    font-size: 1em;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 2px solid transparent;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
+}
+
+.login-btn {
+    background-color: transparent;
+    color: #1abc9c;
+    border: 2px solid #1abc9c;
+}
+
+.login-btn:hover {
+    background-color: #1abc9c;
+    color: #fff;
+}
+
+.signup-btn {
+    background-color: #1abc9c;
+    color: #fff;
+}
+
+.signup-btn:hover {
+    background-color: #16a085;
+    border-color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .navbar-logo h1 {
+        margin: 10px 0;
+    }
+
+    .navbar nav {
+        flex-direction: column;
+        gap: 15px;
+        margin: 20px 0;
+    }
+
+    .login-btn, .signup-btn {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+
+/* Profile Container CSS */
+.profile-container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 50px;
+    background: linear-gradient(135deg, #ffffff, #f9f9f9);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    position: relative;
+}
+/* Hides the footer when inside the profile container */
+.profile-container .footer {
+    display: none; /* Completely hides the footer */
+}
+
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #e6e6e6;
+    padding-bottom: 20px;
+}
+
+.profile-image {
+    position: relative;
+    width: 200px;
+    height: 250px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.profile-image:hover img {
+    transform: scale(1.1);
+    filter: brightness(0.9);
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-info h2 {
+    font-size: 2.5em;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
+}
+
+.profile-info p {
+    font-size: 1.2em;
+    color: #7f8c8d;
+    line-height: 1.8;
+}
+
+.additional-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.additional-info span {
+    background: #ecf0f1;
+    color: #333;
+    font-size: 1em;
+    padding: 8px 15px;
+    border-radius: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.additional-info span:hover {
+    background: #1abc9c;
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-info h2 {
+        font-size: 2em;
+    }
+
+    .profile-image {
+        width: 120px;
+        height: 120px;
+    }
+
+    .additional-info {
+        justify-content: center;
+    }
+}
+
+/* Section Container Styling */
+.doctor-profile,
+.practice-experience,
+.doctor-review,
+.download-section {
+    margin-bottom: 40px;
+    padding: 30px;
+    background: linear-gradient(135deg, #ffffff, #f9f9f9);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.doctor-profile:hover,
+.practice-experience:hover,
+.doctor-review:hover,
+.download-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Section Title Styling */
+.doctor-profile h3,
+.practice-experience h3,
+.doctor-review h3,
+.download-section h3 {
+    font-size: 2em;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    position: relative;
+}
+
+.doctor-profile h3::after,
+.practice-experience h3::after,
+.doctor-review h3::after,
+.download-section h3::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: #1abc9c;
+    margin-top: 8px;
+    border-radius: 2px;
+}
+
+/* Content Representation Styling */
+.section-content {
+    font-size: 1.1em;
+    color: #666;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.section-content.collapsed {
+    max-height: 100px;
+    overflow: hidden;
+    opacity: 0.8;
+}
+
+.section-content.expanded {
+    max-height: 1000px;
+    opacity: 1;
+}
+
+/* Toggle Link Styling */
+.toggle-info {
+    font-size: 1em;
+    font-weight: bold;
+    color: #1abc9c;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.toggle-info:hover {
+    color: #16a085;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .doctor-profile,
+    .practice-experience,
+    .doctor-review,
+    .download-section {
+        padding: 20px;
+    }
+
+    .doctor-profile h3,
+    .practice-experience h3,
+    .doctor-review h3,
+    .download-section h3 {
+        font-size: 1.8em;
+    }
+}
+
+
+
+.doctor-profile, .practice-experience, .doctor-review, .download-section {
+    margin-bottom: 40px;
+}
+
+.doctor-profile h3, .practice-experience h3, .doctor-review h3, .download-section p {
+    font-size: 1.8em;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+/* Medical Actions Section */
+.medical-actions {
+    background: linear-gradient(135deg, #2c3e50, #34495e); /* Smooth gradient */
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Stronger shadow for emphasis */
+    max-width: 550px;
+    margin: 30px auto;
+    font-family: 'Arial', sans-serif;
+    color: #ffffff; /* High contrast text */
+    text-align: center; /* Center align content */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.medical-actions:hover {
+    transform: translateY(-5px); /* Elevate on hover */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25); /* Enhanced shadow on hover */
+}
+
+/* Section Heading */
+.medical-actions h3 {
+    font-size: 2em;
+    margin-bottom: 25px;
+    font-weight: bold;
+    color: #1abc9c; /* Yellow to match the button */
+    text-transform: uppercase;
+    letter-spacing: 1.2px; /* Spaced-out letters for a polished look */
+}
+
+/* List Styling */
+.medical-actions ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+.medical-actions li {
+    font-size: 1.2em;
+    color: #f8f9fa; /* Soft white for readability */
+    margin: 15px 0;
+    padding-left: 40px;
+    position: relative;
+}
+
+/* Check Icon Styling */
+.medical-actions li i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%); /* Center the icon vertically */
+    color: #1abc9c; /* Bright yellow for the icon */
+    font-size: 1.2em;
+}
+
+/* Button Styling */
+.medical-actions button {
+    background: linear-gradient(135deg, #adffef, #1abc9c); /* Gradient button */
+    color: #2c3e50; /* Dark text color for contrast */
+    padding: 15px 35px;
+    border: none;
+    border-radius: 50px; /* Fully rounded button */
+    font-size: 1.3em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(210, 190, 130, 0.4); /* Glow effect */
+}
+
+/* Button Hover Effect */
+.medical-actions button:hover {
+    background: linear-gradient(135deg, #1abc9c, #1abc9c); /* Darker gradient on hover */
+    transform: translateY(-5px); /* Elevate button */
+    box-shadow: 0 6px 20px rgba(224, 201, 134, 0.5); /* Enhanced glow */
+}
+
+/* Button Active Effect */
+.medical-actions button:active {
+    transform: translateY(2px); /* Press effect */
+    box-shadow: none; /* Remove shadow on press */
+}
+
+
+
+/* Practice Experience Section */
+.practice-experience {
+    background: linear-gradient(135deg, #f1f8ff, #eaf4ff); /* Subtle gradient for depth */
+    padding: 30px;
+    border-radius: 15px; /* Smoother rounded corners */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    max-width: 700px;
+    margin: 30px auto;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+}
+
+/* Buttons Styling */
+.appointment-btn, .see-more-btn {
+    background: linear-gradient(135deg, #89d8c9, #1abc9c); /* Gradient for buttons */
+    color: #fff;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border-radius: 25px; /* Rounded pill-shaped buttons */
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(44, 62, 80, 0.2); /* Button shadow */
+}
+
+/* Button Hover Effect */
+.appointment-btn:hover, .see-more-btn:hover {
+    background: linear-gradient(135deg, #91dccd, #1abc9c); /* Reverse gradient */
+    box-shadow: 0 6px 20px rgba(44, 62, 80, 0.3); /* Stronger shadow on hover */
+    transform: translateY(-3px); /* Lift effect */
+}
+
+/* Button Active Effect */
+.appointment-btn:active, .see-more-btn:active {
+    transform: translateY(2px); /* Press effect */
+    box-shadow: none;
+}
+
+/* Experience Section */
+.experience {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+/* Individual Experience Item */
+.experience-item {
+    background: linear-gradient(135deg, #ffffff, #f9f9f9); /* Subtle gradient */
+    border: 2px solid #e0e0e0; /* Soft border */
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Enhanced shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: left;
+}
+
+/* Experience Item Hover Effect */
+.experience-item:hover {
+    transform: translateY(-5px); /* Elevation effect */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+    border-color: #2c3e50; /* Highlight border */
+}
+
+/* Experience Item Title */
+.experience-item h3 {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #2c3e50; /* Dark title color */
+    margin-bottom: 15px;
+}
+
+/* Experience Item Text */
+.experience-item p {
+    margin: 8px 0;
+    font-size: 1.1em;
+    color: #555; /* Soft text color */
+    line-height: 1.5; /* Improved readability */
+}
+
+/* Doctor Reviews Section */
+.doctor-review {
+    background: linear-gradient(135deg, #f9f9f9, #ffffff); /* Subtle gradient */
+    padding: 40px;
+    border-radius: 15px;
+    max-width: 800px;
+    margin: 30px auto;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    font-family: 'Arial', sans-serif;
+}
+
+/* Section Heading */
+.doctor-review h3 {
+    font-size: 2em;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Reviews Container */
+.reviews-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Individual Review Item */
+.review-item {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Light shadow */
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover Effect for Review Item */
+.review-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* View All Button */
+.view-all-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 30px;
+    background-color: #1abc9c;
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.view-all-btn:hover {
+    background-color: #297d6c ;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+/* Add Review Section */
+.add-review {
+    margin-top: 40px;
+    padding: 30px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Soft shadow */
+    text-align: left;
+}
+
+.add-review h4 {
+    font-size: 1.5em;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+/* Form Input Fields */
+.add-review input, .add-review textarea {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Submit Button */
+.submit-review-btn {
+    background-color: #1abc9c;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.submit-review-btn:hover {
+    background-color: #16a085;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.back-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #2c3e50;
+    color: #fff;
+    font-size: 1.1em;
+    text-decoration: none;
+    border-radius: 25px;
+    display: inline-block;
+    text-align: center;
+}
+
+.back-btn:hover {
+    background-color: #34495e;
+}
+
+
+
+/* CTA Container */
+.cta-container {
+    text-align: center;
+    padding: 40px 20px; /* Increased padding for a more spacious layout */
+    background-color: #f1faff; /* Subtle light blue background */
+    border: 2px solid #d1e7fd; /* Lighter border for a softer look */
+    border-radius: 20px; /* Rounded corners */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    max-width: 700px; /* Slightly larger container */
+    margin: 0 auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect for CTA container */
+.cta-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* CTA Text Styling */
+.cta-container p {
+    font-size: 1.3em; /* Larger text */
+    font-weight: bold;
+    color: #2c3e50; /* Darker text for better readability */
+    margin-bottom: 25px;
+    line-height: 1.5; /* Improve line spacing for readability */
+}
+
+/* Button Container (Flexbox for responsive layout) */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* More space between buttons */
+    flex-wrap: wrap; /* Ensures responsiveness on smaller screens */
+}
+
+/* General Button Styling */
+.app-button {
+    display: inline-block;
+    padding: 15px 30px; /* Larger buttons for better touch targets */
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 12px; /* Soft rounded corners */
+    font-size: 1.1em; /* Slightly larger font */
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-align: center;
+    min-width: 150px; /* Ensures buttons are a consistent width */
+}
+
+/* Hover effect for general app-button */
+.app-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px); /* Subtle lift on hover */
+}
+
+/* App Store Button */
+.app-store {
+    background-color: #3b9a74;
+    box-shadow: 0 4px 8px rgba(59, 154, 116, 0.2); /* Soft shadow for the button */
+}
+
+/* Hover effect for App Store button */
+.app-store:hover {
+    background-color: #2a7d5d;
+    transform: translateY(-3px);
+}
+
+/* Google Play Button */
+.google-play {
+    background-color: #4285f4;
+    box-shadow: 0 4px 8px rgba(66, 133, 244, 0.2); /* Soft shadow for the button */
+}
+
+/* Hover effect for Google Play button */
+.google-play:hover {
+    background-color: #357ae8;
+    transform: translateY(-3px);
+}
+
+/* Mobile-friendly adjustments */
+@media screen and (max-width: 768px) {
+    .cta-container {
+        padding: 30px 20px; /* Reduced padding for smaller screens */
+    }
+
+    .cta-container p {
+        font-size: 1.1em; /* Slightly smaller text for smaller screens */
+    }
+
+    .button-container {
+        gap: 10px; /* Reduced gap for smaller screens */
+    }
+
+    .app-button {
+        font-size: 1em; /* Adjusted font size for smaller buttons */
+        min-width: 130px; /* Slightly smaller buttons */
+    }
+}
+
+  
+
