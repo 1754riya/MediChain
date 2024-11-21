@@ -1,0 +1,479 @@
+*{
+    scroll-behavior: smooth;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1c1c1c;
+    color: #f0f0f0;
+}
+ 
+header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #2C3E50;
+    color: white;
+
+}
+
+header .logo {
+    display: flex;
+    font-size: 24px;
+    font-weight: bold;
+    align-items: center;
+   
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+header nav ul li {
+    margin-left: 20px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+header nav ul li a:hover {
+    color: rgb(69 149 235 );
+    transform: scale(1.5);
+    text-decoration: underline;
+}
+
+header .search-bar input {
+    padding: 5px;
+    border: none;
+    border-radius: 3px;
+}
+
+.banner {
+   
+    text-align: center;
+    padding: 100px 20px;
+    background: url('banner.jpg') no-repeat center center/cover;
+    color: white;
+    
+    
+
+    
+}
+
+.banner h1 {
+   
+    font-size: 48px;
+    transition: color 0.3s ease;
+    
+    
+}
+
+.banner h1:hover {
+    color: rgb(69 149 235 );
+}
+
+.banner p {
+    font-size: 24px;
+    transition: color 0.3s ease;
+}
+
+.banner p:hover {
+    color: rgb(69 149 235 );
+    
+    
+}
+
+.banner .btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: white;
+    color: #2c2c2c;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    
+}
+
+.banner .btn:hover {
+    background-color: rgb(69 149 235 );
+    color: #2c2c2c;
+    transform: scale(1.1);
+    text-decoration: underline;
+    transform: scale(1.5); 
+}
+
+.timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.timeline::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: 100%;
+    width: 2px;
+    background: #ffffff; /* Wire color */
+    transform: translateX(-50%);
+    z-index: -1;
+}
+.dark-mode .timeline::before{
+    background: black;
+}
+#about {
+    color: Black;
+    background: url('Helpage .png') no-repeat center center/cover;
+    width: 400px;
+    margin right: 0px;
+}
+
+
+.container {
+    padding: 10px 40px;
+    position: relative;
+    background-color: inherit;
+    width: 40%;
+}
+
+.container.left {
+    left: 0;
+    padding: 20px, 30px;
+   
+}
+
+.container.right {
+    left: 50%;
+}
+.container::after {
+    content: "";
+    position: absolute;
+    width: 50%; 
+    height: 2px;
+    background: #000; 
+    top: 50%;
+    z-index: -1;
+}
+.container.left #about ul li {
+    color: black; /* Set font color to black */
+    font-size: 16px; /* Optional: adjust font size */
+    line-height: 1.6; /* Optional: improve readability */
+    margin-bottom: 10px; /* Optional: spacing between list items */
+    font-weight: bold;
+    
+}
+.container.left #about ul li a{
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: white;
+    color: #2c2c2c;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    
+
+}
+.container.left #about ul li a:hover{
+    
+    background-color: #2c2c2c; /* Change background color */
+    color: white; /* Change text color */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+
+    
+    
+
+}
+.container.left::after,
+.container.right::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 2px;
+    background: #000; 
+    z-index: -1;
+}
+
+.container.left::after {
+    left: 7%; 
+    transform: translateX(0);
+}
+
+.container.right::after {
+    right: -60%;
+    transform: translateX(0);
+}
+
+#types{
+    color: white;
+    background: url('antaraimg.jpg') no-repeat center center/cover;
+    width: 400px;
+    margin right: 0px;
+
+}
+.container.right #types ul li {
+    color: white; /* Set font color to black */
+    font-size: 16px; /* Optional: adjust font size */
+    line-height: 1.6; /* Optional: improve readability */
+    margin-bottom: 10px; /* Optional: spacing between list items */
+    font-weight: bold;
+
+
+}
+.container.right #types ul li a{
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: white;
+    color: #2c2c2c;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    
+
+}
+.container.right #types ul li a:hover{
+    
+    background-color: #2c2c2c; /* Change background color */
+    color: white; /* Change text color */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+#how-to{
+    color: white;
+    background: url('swasthimg.png') no-repeat center center/cover;
+    width: 400px;
+    margin right: 0px;
+    text-weight: bold;
+
+}
+.container.left #how-to ol  p {
+    color: white; /* Set font color to black */
+    font-size: 16px; /* Optional: adjust font size */
+    line-height: 1.6; /* Optional: improve readability */
+    margin-bottom: 10px; /* Optional: spacing between list items */
+    font-weight: bold;
+    max-width-20px;
+    text-align: left;
+
+
+}
+.container.left #how-to  p a{
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: white;
+    color: #2c2c2c;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    
+
+}
+.container.left #how-to p a:hover{
+    
+    background-color: #2c2c2c; /* Change background color */
+    color: white; /* Change text color */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+.textalign{   
+    width: 270px;
+}
+
+#case-studies{
+    color: white;
+    background: url('Charutar.png') no-repeat center center/cover;
+    width: 400px;
+    margin right: 0px;
+    text-weight: bold;
+
+}
+.container.right #case-studies   p {
+    color: white; /* Set font color to black */
+    font-size: 16px; /* Optional: adjust font size */
+    line-height: 1.6; /* Optional: improve readability */
+    margin-bottom: 10px; /* Optional: spacing between list items */
+    font-weight: bold;
+    max-width-20px;
+    text-align: left;
+    text-weight: bold;
+}
+
+.textalign3{
+    width: 250px;
+}
+.container.right #case-studies  p a{
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: white;
+    color: #2c2c2c;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    
+
+}
+#toggle-theme{   
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#toggle-theme {
+    background: none;
+    border: 2px solid white;
+    color: white;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+
+#toggle-theme:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.container.right #case-studies p a:hover{
+    
+    background-color: #2c2c2c; /* Change background color */
+    color: white; /* Change text color */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* .container::after {
+    content: "";
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    right: -17px;
+    background-color: white;
+    border: 4px solid rgb(69 149 235 );
+    top: 15px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.left::after {
+    left: -16px;
+}
+
+.right::after {
+    left: -16px;
+} */
+
+
+.section {
+    padding: 20px 30px;
+    background-color: #2c2c2c;
+    color: white;
+    position: relative;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+.tag{
+    text-decoration: none;
+    color: white;
+}
+
+.section:hover {
+    background-color: #3c3c3c;
+}
+
+footer {
+    background-color: #2c2c2c;
+    color: white;
+    padding: 20px;
+    text-align: center; 
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; 
+}
+
+.footer-content p {
+    margin: 10px 0;
+}
+
+.socials {
+    list-style: none;
+    margin: 10px 0;
+    padding: 0;
+    display: flex;
+    gap: 15px; 
+}
+
+.socials li {
+    display: inline;
+}
+
+.socials a {
+    color: white;
+    text-decoration: none;
+    font-size: 24px; 
+    transition: color 0.3s ease;
+}
+
+.socials a:hover {
+    color: rgb(69, 149, 235); 
+}
+
+.newsletter {
+    display: flex;
+    gap: 10px; 
+    flex-direction: column;
+    align-items: center;
+}
+
+.newsletter input {
+    padding: 10px;
+    border-radius: 3px;
+    border: none;
+    width: 250px; 
+}
+
+.newsletter button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    background-color: rgb(69, 149, 235);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.newsletter button:hover {
+    background-color: #1c1c1c;
+}
+.section li{
+    color:#f0f0f0
+}
+
+.dark-mode{
+    background-color: #0000;
+}
+.dark-mode h1, .dark-mode .herosub{
+    color: black;
+}
+.dark-mode .btn {
+    background-color: black;
+    color: white;
+}
