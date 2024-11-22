@@ -1,11 +1,27 @@
-document.getElementById('toggle-theme').addEventListener('click', function() {
-    document.body.classList.toggle('dark-mode');
-    
-    const icon = document.getElementById('toggle-theme');
-    
-    if (document.body.classList.contains('dark-mode')) {
-        icon.textContent = '🌙 '; // Sun icon for light mode
-    } else {
-        icon.textContent = '🌞'; // Moon icon for dark mode
-    }
-}); 
+// script.js
+
+// Theme Toggle Logic
+const themeToggle = document.getElementById('theme-toggle');
+const themeToggleText = document.getElementById('theme-toggle-text');
+
+// Check for saved user preference, if any, on load of the website
+const currentTheme = localStorage.getItem('theme') || 'light';
+
+if (currentTheme === 'dark') {
+  document.documentElement.setAttribute('data-theme', 'dark');
+  themeToggleText.textContent = '🌞';
+} else {
+  themeToggleText.textContent = '🌚';
+}
+
+themeToggle.addEventListener('click', function () {
+  let theme = 'light';
+  if (document.documentElement.getAttribute('data-theme') === 'light') {
+    theme = 'dark';
+    themeToggleText.textContent = '🌞';
+  } else {
+    themeToggleText.textContent = '🌚';
+  }
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+});
