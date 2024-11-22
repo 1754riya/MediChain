@@ -12,78 +12,129 @@ body {
   background-color: #f0f4f8;
 }
 
-/* Header styles */
-header {
-  background-color: #e6f7ff; ;
-  padding: 1.5rem 3rem; /* Increased padding */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+/* Header Styles */
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  z-index: 1000;
+  height: 60px; /* Fixed height for header */
 }
 
+/* Update header styles to ensure consistent height */
 nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.5rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap; 
-  
+  height: 100%;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  font-weight: bold;
-  font-size: 2rem; /* Increased font size */
+  gap: 0.5rem;
 }
 
-.logo img {
-  margin-right: 0.5rem;
+.logo span {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(45deg, #2196f3, #4CAF50);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-nav ul {
+.nav-links {
   display: flex;
-  list-style: none;
-  flex-wrap: wrap; /* Make nav items wrap on smaller screens */
+  gap: 2rem;
 }
 
-nav ul li {
-  margin-left: 2rem;
+/* Add this to your CSS */
+.nav-links a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    position: relative;
 }
 
-nav ul li a {
-  text-decoration: none;
-  color: #333;
-  transition: color 0.3s;
+.nav-links a img {
+    vertical-align: middle;
 }
 
-nav ul li a:hover,
-nav ul li a:focus {
-  color: #1a73e8; /* Darker blue when active */
+.nav-links a span {
+    display: inline-block;
+    position: relative;
 }
 
-nav ul li a:active {
-  color: #0c47a1; /* Even darker blue when clicked */
+.nav-links a span::after {
+    content: ' ';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(45deg, #2196f3, #4CAF50);
+    transition: width 0.3s;
 }
 
-.auth-buttons button {
-  padding: 0.5rem 1rem;
-  margin-left: 1rem;
-  border: none;
+.nav-links a::after {
+  content: ' ';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(45deg, #2196f3, #4CAF50);
+  transition: width 0.3s;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-secondary, 
+.btn-primary {
+  padding: 0.5rem 1.5rem;
   border-radius: 50px;
-  height: 40px;
-  font-size: medium;
-  cursor: pointer;
+  font-weight: 500;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.sign-in {
-  background-color: #ffffff;
-  color: #4CAF50;
-  border: 1px solid #4CAF50;
+.btn-secondary {
+  background: transparent;
+  border: 2px solid #2196f3;
+  color: #2196f3;
 }
 
-.login {
-  background-color: #4CAF50;
-  color: #ffffff;
-  border-radius: 50px; /* Rounded button */
+.btn-primary {
+  background: linear-gradient(45deg, #2196f3, #4CAF50);
+  border: none;
+  color: white;
 }
+
+.btn-secondary:hover,
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+}
+
 
 /* Hero section styles */
 #hero {

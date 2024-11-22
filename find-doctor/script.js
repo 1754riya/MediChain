@@ -19,7 +19,7 @@
         specialty: "Neurologist",
         experience: 10,
         rating: 4.7,
-        image: "https://www.istockphoto.com/photos/indian-doctor"
+        image: "https://static.vecteezy.com/system/resources/thumbnails/026/375/249/small_2x/ai-generative-portrait-of-confident-male-doctor-in-white-coat-and-stethoscope-standing-with-arms-crossed-and-looking-at-camera-photo.jpg"
     },
     {
         name: "Dr. James Wilson",
@@ -75,7 +75,8 @@ function displayResults(results) {
                         <td>${doctor.specialty}</td>
                         <td>${doctor.experience} years</td>
                         <td>⭐ ${doctor.rating}</td>
-                        <td><button class="book-btn">Book Now</button></td>
+                        <td><button class="book-btn" onClick="window.location.href = '/Doctor/index.html'" >Book Now</button></td>
+                    ;
                     </tr>
                 `).join('')}
             </tbody>
