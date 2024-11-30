@@ -8,7 +8,7 @@ import SignUpPage from './app/signup/signup';
 import LoginPage from './app/login/login';
 import PrivateRoute from './PrivateRoute';
 import { AuthProvider } from './AuthContext';
-import Dashboard from './app/dashboard/dashoard.tsx';
+import Dashboard from './app/dashboard/dashboard.tsx';
 
 function AppRoutes() {
   return (

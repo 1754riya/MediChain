@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { auth } from '@/firebase/config';
+import './login.css';
 import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
@@ -142,7 +143,7 @@ export default function LoginPage() {
         <div className="container mx-auto px-4 py-8">
           <div className="grid gap-8 lg:grid-cols-2 shadow-lg rounded-lg bg-white">
             {/* Sign Up Form Section */}
-            <div className="bg-white rounded-lg p-6">
+            <div className="loginform bg-white rounded-lg p-6">
               <LoginForm />
             </div>
   
