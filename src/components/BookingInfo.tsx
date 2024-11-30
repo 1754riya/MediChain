@@ -1,5 +1,3 @@
-import React from "react";
-
 const BookingInfo = () => {
   return (
     <div className="booking-info">

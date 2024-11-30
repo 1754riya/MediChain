@@ -1,11 +1,11 @@
-import React from "react";
-import patientImage from "../assets/patient.jpeg";
+
+// import patientImage from "../assets/patient.jpeg";
 
 const PersonalDetails = () => {
   return (
     <div className="personal-detail">
       <div className="profile">
-        <img src={patientImage} alt="Profile" />
+        <img src='/hero.png' alt="Profile" />
         <div className="info">
           <h3>Riya Mehta</h3>
           <p>+91 9999333422 • riruu93@mail.com</p>
