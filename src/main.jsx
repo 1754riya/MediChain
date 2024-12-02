@@ -12,6 +12,7 @@ import PrivateRoute from './PrivateRoute.jsx';
 import NGO from './NGOs/ngo.jsx';
 import Layout from './components/Layout.jsx'; // Import Layout
 import SearchPage from './search/search.jsx';
+import StartPage from './doc-dashboard/start/start.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -37,6 +38,14 @@ createRoot(document.getElementById('root')).render(
               element={
                 <PrivateRoute>
                   <Dashboard />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/dashboard/start"
+              element={
+                <PrivateRoute>
+                  <StartPage />
                 </PrivateRoute>
               }
             />

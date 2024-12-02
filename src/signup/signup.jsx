@@ -14,11 +14,12 @@ export default function SignupPage() {
         lastName: '',
         email: '',
         password: '',
+        specialty: '',
+        location: '',
     });
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    // Track the type of user being registered
     const [userType, setUserType] = useState('patient');
 
     const handleChange = (e) => {
@@ -29,34 +30,54 @@ export default function SignupPage() {
         }));
     };
 
-    const handleSubmit = async (e, type) => {
+    const generateSearchKeywords = (name, specialty) => {
+        const keywords = [];
+        const nameKeywords = name.toLowerCase().split(' ');
+        const specialtyKeywords = specialty.toLowerCase().split(' ');
+
+        keywords.push(name.toLowerCase(), specialty.toLowerCase());
+        keywords.push(...nameKeywords);
+        keywords.push(...specialtyKeywords);
+
+        return keywords;
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const { email, password, firstName, lastName } = formData;
+        const { email, password, firstName, lastName, specialty, location } = formData;
         try {
-            // Create user with email and password
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
 
-            // Prepare user data
-            const userData = {
+            const name = `${firstName} ${lastName}`;
+
+            let userData = {
                 uid: user.uid,
                 firstName,
                 lastName,
                 email,
-                role: type, // 'patient' or 'doctor'
+                role: userType, // 'patient' or 'doctor'
                 createdAt: new Date(),
             };
 
-            // Determine the collection based on user type
-            const collectionName = type === 'doctor' ? 'doctors' : 'patients';
+            let collectionName = 'patients';
 
-            // Store user data in Firestore
+            if (userType === 'doctor') {
+                collectionName = 'doctors';
+                userData = {
+                    ...userData,
+                    specialty,
+                    location,
+                    name,
+                    searchKeywords: generateSearchKeywords(name, specialty),
+                };
+            }
+
             await setDoc(doc(db, collectionName, user.uid), userData);
 
-            console.log(`${type.charAt(0).toUpperCase() + type.slice(1)} signed up:`, user);
+            console.log(`${userType.charAt(0).toUpperCase() + userType.slice(1)} signed up:`, user);
 
-            // Redirect to dashboard or desired page
-            if (type === 'doctor') {
+            if (userType === 'doctor') {
                 navigate('/dashboard');
             } else {
                 navigate('/');
@@ -67,33 +88,43 @@ export default function SignupPage() {
         }
     };
 
-    const handleGoogleSignIn = async (type) => {
+    const handleGoogleSignIn = async () => {
         try {
             const result = await signInWithPopup(auth, googleProvider);
             const user = result.user;
 
-            // Check if user data already exists in Firestore
-            const userDoc = doc(db, type === 'doctor' ? 'doctors' : 'patients', user.uid);
-            // You might want to fetch the document to check existence or handle differently
+            const name = user.displayName || '';
+            const firstName = name.split(' ')[0] || '';
+            const lastName = name.split(' ')[1] || '';
 
-            // Prepare user data
-            const userData = {
+            let userData = {
                 uid: user.uid,
-                firstName: user.displayName?.split(' ')[0] || '',
-                lastName: user.displayName?.split(' ')[1] || '',
+                firstName,
+                lastName,
                 email: user.email,
-                role: type, // 'patient' or 'doctor'
+                role: userType, // 'patient' or 'doctor'
                 photoURL: user.photoURL || '',
                 createdAt: new Date(),
             };
 
-            // Store user data in Firestore
-            await setDoc(userDoc, userData, { merge: true });
+            let collectionName = 'patients';
 
-            console.log(`${type.charAt(0).toUpperCase() + type.slice(1)} signed in with Google:`, user);
+            if (userType === 'doctor') {
+                collectionName = 'doctors';
+                userData = {
+                    ...userData,
+                    specialty: formData.specialty,
+                    location: formData.location,
+                    name,
+                    searchKeywords: generateSearchKeywords(name, formData.specialty),
+                };
+            }
 
-            // Redirect to dashboard or desired page
-            if (type === 'doctor') {
+            await setDoc(doc(db, collectionName, user.uid), userData, { merge: true });
+
+            console.log(`${userType.charAt(0).toUpperCase() + userType.slice(1)} signed in with Google:`, user);
+
+            if (userType === 'doctor') {
                 navigate('/dashboard');
             } else {
                 navigate('/');
@@ -109,22 +140,36 @@ export default function SignupPage() {
             {/* Left Side - Form */}
             <div className="w-full lg:w-1/2 p-8 flex flex-col justify-center">
                 <div className="max-w-md mx-auto w-full">
-                    <h1 className="text-3xl font-bold mb-8">Create a free account</h1>
+                    <h1 className="text-3xl font-bold mb-8">Create a free account as a </h1>
+
+                    {/* Toggle User Type */}
+                    <div className="flex mb-6">
+                        <button
+                            type="button"
+                            className={`flex-1 py-3 rounded-l-lg font-medium transition-colors ${
+                                userType === 'patient' ? 'bg-green-500 text-white' : 'bg-gray-200'
+                            }`}
+                            onClick={() => setUserType('patient')}
+                        >
+                          Patient
+                        </button>
+                        <button
+                            type="button"
+                            className={`flex-1 py-3 rounded-r-lg font-medium transition-colors ${
+                                userType === 'doctor' ? 'bg-blue-500 text-white' : 'bg-gray-200'
+                            }`}
+                            onClick={() => setUserType('doctor')}
+                        >
+                            Doctor
+                        </button>
+                    </div>
 
                     {/* Google Sign-Up */}
                     <SocialButton
                         icon={FcGoogle}
                         provider="Google"
                         className="bg-blue-600 mb-3"
-                        onClick={() => handleGoogleSignIn('patient')}
-                    />
-
-                    {/* Twitter/X Sign-Up */}
-                    <SocialButton
-                        icon={FaXTwitter}
-                        provider="X"
-                        className="bg-black mb-3"
-                        onClick={() => console.log('X login')}
+                        onClick={handleGoogleSignIn}
                     />
 
                     {/* Separator */}
@@ -138,7 +183,7 @@ export default function SignupPage() {
                     {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
 
                     {/* Sign-Up Form */}
-                    <form onSubmit={(e) => handleSubmit(e, 'patient')}>
+                    <form onSubmit={handleSubmit}>
                         <InputField
                             label="First Name"
                             placeholder="Alexa"
@@ -178,22 +223,36 @@ export default function SignupPage() {
                             minLength={6}
                         />
 
+                        {/* Additional Fields for Doctors */}
+                        {userType === 'doctor' && (
+                            <>
+                                <InputField
+                                    label="Specialty"
+                                    placeholder="Cardiologist"
+                                    name="specialty"
+                                    value={formData.specialty}
+                                    onChange={handleChange}
+                                    required
+                                />
+
+                                <InputField
+                                    label="Location"
+                                    placeholder="New York"
+                                    name="location"
+                                    value={formData.location}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </>
+                        )}
+
                         <button
                             type="submit"
                             className="w-full bg-green-500 text-white py-3 rounded-lg font-medium hover:bg-green-600 transition-colors mb-4"
                         >
-                            Sign up as Patient
+                            {userType === 'doctor' ? 'Sign up as Doctor' : 'Sign up as Patient'}
                         </button>
                     </form>
-
-                    {/* Sign-Up as Doctor Button */}
-                    <button
-                        type="button"
-                        className="w-full border border-gray-300 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors mb-4"
-                        onClick={(e) => handleSubmit(e, 'doctor')}
-                    >
-                        Sign up as Doctor
-                    </button>
 
                     {/* Footer Link */}
                     <p className="text-center text-gray-600">
