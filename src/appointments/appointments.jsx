@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { collection, query, where, getDocs, doc, setDoc } from '@firebase/firestore';
 import { auth, db } from '../firebase/config';
-import { BookingTabs } from './Tabs';
-import { BookingList } from './EventList';
+import { BookingTabs } from '../doc-dashboard/Tabs';
+import AppointmentCard from '../components/AppointmentCard';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
 import { signOut } from '@firebase/auth';
-import { PatientSidebar } from './PatientSidebar';
+import { PatientSidebar } from '../doc-dashboard/PatientSidebar';
 
 function Dashboard() {
   const [activeTab, setActiveTab] = useState('Upcoming');
@@ -17,7 +17,7 @@ function Dashboard() {
   const { currentUser } = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedPatientId, setSelectedPatientId] = useState(null);
-  const [selectedAppointmentId, setSelectedAppointmentId] = useState(null); // Add this line
+  const [selectedAppointmentId, setSelectedAppointmentId] = useState(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
@@ -27,17 +27,13 @@ function Dashboard() {
         if (!user) return;
 
         const appointmentsRef = collection(db, 'appointments');
-        const q = query(appointmentsRef, where('doctorId', '==', user.uid));
+        const q = query(appointmentsRef, where('patientId', '==', currentUser.uid));
         const querySnapshot = await getDocs(q);
         
         const fetchedAppointments = querySnapshot.docs.map(doc => ({
           id: doc.id,
           ...doc.data(),
-          // Convert Firestore timestamp to Date
           startTime: doc.data().date.toDate(),
-          endTime: new Date(doc.data().date.toDate().getTime() + 60 * 60 * 1000), // Add 1 hour
-          title: `Appointment with ${doc.data().patientName}`,
-          location: 'Online Consultation'
         }));
 
         setAppointments(fetchedAppointments);
@@ -50,18 +46,17 @@ function Dashboard() {
     };
 
     fetchAppointments();
-  }, []);
+  }, [currentUser]);
 
-  const filteredBookings = appointments.filter(appointment => {
+  const filteredAppointments = appointments.filter(appointment => {
     const now = new Date();
     const appointmentDate = new Date(appointment.startTime);
 
     switch (activeTab) {
       case 'Upcoming':
-        // Return true only if appointment is in future AND not cancelled
         return appointmentDate > now && appointment.status !== 'cancelled';
       case 'Past':
-        return appointmentDate < now;
+        return appointmentDate < now || appointment.status === 'completed';
       case 'Cancelled':
         return appointment.status === 'cancelled';
       default:
@@ -72,33 +67,33 @@ function Dashboard() {
   const handleEdit = async (booking, action) => {
     if (action === 'view') {
       setSelectedPatientId(booking.patientId);
-      setSelectedAppointmentId(booking.id); // Set the appointment ID
+      setSelectedAppointmentId(booking.id);
       setIsSidebarOpen(true);
     }
-    if (action === 'delete') {
-      try {
-        const appointmentRef = doc(db, 'appointments', booking.id);
-        await setDoc(appointmentRef, {
-          ...booking,
-          status: 'cancelled',
-          updatedAt: new Date()
-        }, { merge: true });
-
-        // Update local state to reflect the change
-        setAppointments(prevAppointments => 
-          prevAppointments.map(apt => 
-            apt.id === booking.id 
-              ? { ...apt, status: 'cancelled' }
-              : apt
-          )
-        );
-      } catch (error) {
-        console.error('Error cancelling appointment:', error);
-        alert('Failed to cancel appointment');
-      }
-    }
-    // Handle other actions...
+    // Handle other actions if necessary
     console.log('Edit action:', action, booking);
+  };
+
+  const handleCancelAppointment = async (appointmentId) => {
+    try {
+      const appointmentRef = doc(db, 'appointments', appointmentId);
+      await setDoc(appointmentRef, {
+        status: 'cancelled',
+        updatedAt: new Date()
+      }, { merge: true });
+
+      // Update local state to reflect the change
+      setAppointments(prevAppointments => 
+        prevAppointments.map(apt => 
+          apt.id === appointmentId 
+            ? { ...apt, status: 'cancelled' }
+            : apt
+        )
+      );
+    } catch (error) {
+      console.error('Error cancelling appointment:', error);
+      alert('Failed to cancel appointment');
+    }
   };
 
   const handleLogout = async () => {
@@ -117,11 +112,11 @@ function Dashboard() {
   };
 
   if (loading) {
-    return <div className="p-6">Loading appointments...</div>;
+    return <div className="p-6 text-center">Loading appointments...</div>;
   }
 
   if (error) {
-    return <div className="p-6 text-red-500">{error}</div>;
+    return <div className="p-6 text-center text-red-500">{error}</div>;
   }
 
   return (
@@ -168,22 +163,27 @@ function Dashboard() {
         onTabChange={setActiveTab}
       />
       
-      {filteredBookings.length === 0 ? (
+      {filteredAppointments.length === 0 ? (
         <p className="text-gray-500 text-center py-8">
           No {activeTab.toLowerCase()} appointments found
         </p>
       ) : (
-        <BookingList
-          bookings={filteredBookings}
-          onEdit={handleEdit}
-        />
+        <div className="space-y-4">
+          {filteredAppointments.map((appointment) => (
+            <AppointmentCard
+              key={appointment.id}
+              appointment={appointment}
+              handleCancelAppointment={handleCancelAppointment}
+            />
+          ))}
+        </div>
       )}
 
       <PatientSidebar
         isOpen={isSidebarOpen}
         onClose={() => setIsSidebarOpen(false)}
         patientId={selectedPatientId}
-        appointmentId={selectedAppointmentId} // Pass the appointment ID
+        appointmentId={selectedAppointmentId}
       />
     </div>
   );

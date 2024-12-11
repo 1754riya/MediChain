@@ -10,7 +10,7 @@ import Pelvic from '../assets/pelvic-exam.png';
 const specialties = [
   { name: 'Primary Care', icon: HeartIcon },
   { name: 'Dentist', icon: DentistIcon },
-  { name: 'OB-GYN', icon: PelvicIcon },
+  { name: 'Gynologist', icon: PelvicIcon },
   { name: 'Dermatologist', icon: SkinIcon },
   { name: 'Psychiatrist', icon: MentalIcon },
   { name: 'Eye Doctor', icon: EyeIcon },

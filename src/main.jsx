@@ -13,6 +13,9 @@ import NGO from './NGOs/ngo.jsx';
 import Layout from './components/Layout.jsx'; // Import Layout
 import SearchPage from './search/search.jsx';
 import StartPage from './doc-dashboard/start/start.jsx';
+import View from './search/view.jsx';
+import Appointments from './appointments/appointments.jsx';
+import Settings from './settings/settings.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -26,6 +29,12 @@ createRoot(document.getElementById('root')).render(
               <Route index element={<App />} />
               <Route path="help" element={<NGO />} />
               <Route path="search" element={<SearchPage/>}/>
+              <Route path="view" element={<View />} />
+              <Route path="appointments" element={<PrivateRoute>
+                <Appointments />
+              </PrivateRoute>} />
+              <Route path="settings" element={<PrivateRoute>
+                <Settings/></PrivateRoute>} />
             </Route>
 
             {/* Auth Routes without Layout */}
