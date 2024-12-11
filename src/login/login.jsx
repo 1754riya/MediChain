@@ -4,9 +4,9 @@ import { FcGoogle } from 'react-icons/fc';
 import { FaXTwitter } from 'react-icons/fa6';
 import { SocialButton } from '../signup/SocialButton';
 import { InputField } from '../signup/InputField';
-import { auth, googleProvider, db } from '../firebase/config'; // Import 'db'
-import { signInWithEmailAndPassword, signInWithPopup } from '@firebase/auth';
-import { doc, getDoc } from '@firebase/firestore'; // Import Firestore functions
+import { auth, googleProvider, db } from '../firebase/config';
+import { signInWithEmailAndPassword, signInWithPopup, sendPasswordResetEmail } from '@firebase/auth';
+import { doc, getDoc } from '@firebase/firestore';
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
@@ -14,14 +14,19 @@ export default function LoginPage() {
     password: '',
   });
   const [error, setError] = useState('');
+  const [resetError, setResetError] = useState('');
+  const [resetSuccess, setResetSuccess] = useState('');
+  const [resetEmail, setResetEmail] = useState('');
+  const [isResetting, setIsResetting] = useState(false);
+  const [showResetModal, setShowResetModal] = useState(false);
   const navigate = useNavigate();
 
   // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -82,20 +87,45 @@ export default function LoginPage() {
     }
   };
 
+  // Handle show reset password modal
+  const handleShowResetModal = () => {
+    setResetEmail('');
+    setResetError('');
+    setResetSuccess('');
+    setShowResetModal(true);
+  };
+
+  // Handle reset password
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
+    setIsResetting(true);
+    setResetError('');
+    setResetSuccess('');
+    try {
+      await sendPasswordResetEmail(auth, resetEmail);
+      setResetSuccess('Password reset email sent. Please check your inbox.');
+    } catch (err) {
+      console.error('Error sending password reset email:', err);
+      setResetError('Failed to send password reset email. Please try again.');
+    } finally {
+      setIsResetting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen flex text-left">
       {/* Left Side - Form */}
       <div className="w-full lg:w-1/2 p-8 flex flex-col justify-center">
         <div className="max-w-md mx-auto w-full">
           <h1 className="text-3xl font-bold mb-8">Log in to your account</h1>
-          
+
           <SocialButton
             icon={FcGoogle}
             provider="Google"
             className="bg-blue-600 mb-3"
             onClick={handleGoogleSignIn}
           />
-          
+
           <SocialButton
             icon={FaXTwitter}
             provider="X"
@@ -130,23 +160,27 @@ export default function LoginPage() {
               onChange={handleChange}
             />
 
-            <button
-              type="submit"
-              className="w-full bg-blue-500 text-white py-3 rounded-lg font-medium hover:bg-blue-600 transition-colors mb-4"
-            >
-              Log In
-            </button>
+            <div className="flex items-center justify-between mb-4">
+              <button
+                type="submit"
+                className="w-full bg-blue-500 text-white py-3 rounded-lg font-medium hover:bg-blue-600 transition-colors"
+              >
+                Log In
+              </button>
+            </div>
 
-            {/* <button
-              type="button"
-              className="w-full border border-gray-300 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors mb-4"
-              onClick={() => console.log('Log in as Doctor')}
-            >
-              Log in as Doctor
-            </button> */}
+            <div className="text-right">
+              <button
+                type="button"
+                onClick={handleShowResetModal}
+                className="text-blue-600 hover:underline text-sm"
+              >
+                Forgot Password?
+              </button>
+            </div>
           </form>
 
-          <p className="text-center text-gray-600">
+          <p className="text-center text-gray-600 mt-4">
             Don't have an account?{' '}
             <Link to="/signup" className="text-blue-600 hover:underline">
               Sign up
@@ -160,9 +194,60 @@ export default function LoginPage() {
         <div className="w-32 h-32 bg-gray-300 rounded-full mb-8"></div>
         <h2 className="text-3xl font-bold mb-4">Welcome to Medi-Chain</h2>
         <p className="text-gray-600 text-center max-w-md">
-          "Your health, your control – MediChain simplifies care, secures your records, and connects you to better healthcare anytime, anywhere."
+          "Your health, your control – MediChain simplifies care, secures your records, and connects you to
+          better healthcare anytime, anywhere."
         </p>
       </div>
+
+      {/* Reset Password Modal */}
+      {showResetModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md mx-auto">
+            <h2 className="text-xl font-bold mb-4">Reset Password</h2>
+            {resetError && <p className="text-red-500 text-sm mb-4">{resetError}</p>}
+            {resetSuccess && <p className="text-green-500 text-sm mb-4">{resetSuccess}</p>}
+            {!resetSuccess ? (
+              <form onSubmit={handleResetPassword}>
+                <InputField
+                  label="Email Address"
+                  type="email"
+                  placeholder="abc@google.com"
+                  name="resetEmail"
+                  value={resetEmail}
+                  onChange={(e) => setResetEmail(e.target.value)}
+                  required
+                />
+                <div className="flex items-center justify-end mt-4">
+                  <button
+                    type="button"
+                    onClick={() => setShowResetModal(false)}
+                    className="mr-4 text-gray-600 hover:underline"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={isResetting}
+                    className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors disabled:opacity-50"
+                  >
+                    {isResetting ? 'Sending...' : 'Send Reset Email'}
+                  </button>
+                </div>
+              </form>
+            ) : (
+              <div className="mt-4 flex items-center justify-end">
+                <button
+                  type="button"
+                  onClick={() => setShowResetModal(false)}
+                  className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors"
+                >
+                  Close
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
