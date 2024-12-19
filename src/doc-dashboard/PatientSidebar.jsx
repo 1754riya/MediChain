@@ -17,20 +17,24 @@ export function PatientSidebar({ isOpen, onClose, patientId, appointmentId }) {
 
       try {
         setLoading(true);
-        // First verify if current user is a doctor
         const currentUser = auth.currentUser;
         if (!currentUser) {
           throw new Error('No authenticated user');
         }
 
-        console.log('Attempting to fetch patient:', patientId); // Debug log
         const patientDoc = await getDoc(doc(db, 'patients', patientId));
 
         if (patientDoc.exists()) {
-          console.log('Patient data found'); // Debug log
-          setPatient(patientDoc.data());
+          const patientData = patientDoc.data();
+          setPatient(patientData);
+          
+          // Convert existing vaccinations array to object for easier checking
+          const existingVaccinations = {};
+          patientData.vaccinations?.forEach(vac => {
+            existingVaccinations[vac.name] = true;
+          });
+          setVaccinations(existingVaccinations);
         } else {
-          console.log('Patient not found'); // Debug log
           setError('Patient not found');
         }
       } catch (err) {
@@ -134,26 +138,68 @@ export function PatientSidebar({ isOpen, onClose, patientId, appointmentId }) {
               </Section>
 
               {/* Vaccination Details */}
-              <Section title="Vaccination Details">
-                <div className="space-y-3">
-                  {['COVID-19', 'Flu', 'Tetanus', 'MMR', 'Hepatitis B'].map((vaccine) => (
-                    <div key={vaccine} className="flex items-center">
-                      <input
-                        type="checkbox"
-                        id={`vaccine-${vaccine}`}
-                        checked={vaccinations[vaccine] || false}
-                        onChange={() => handleVaccinationToggle(vaccine)}
-                        className="h-4 w-4 text-blue-600 rounded border-gray-300 
-                          focus:ring-blue-500"
-                      />
-                      <label 
-                        htmlFor={`vaccine-${vaccine}`}
-                        className="ml-2 block text-sm text-gray-900"
-                      >
-                        {vaccine}
-                      </label>
+              
+              <Section title="Child Vaccination Details">
+                <div className="space-y-6">
+                  {/* Birth to 15 months */}
+                  <div className="border-l-4 border-blue-200 pl-4">
+                    <h4 className="text-sm font-semibold text-gray-700 mb-2">Birth to 15 Months</h4>
+                    <div className="space-y-2">
+                      {[
+                        { name: 'BCG', recommended: 'At birth' },
+                        { name: 'Hepatitis B', recommended: '0-2 months' },
+                        { name: 'DPT', recommended: '6-14 weeks' },
+                        { name: 'Polio (OPV)', recommended: '6-14 weeks' },
+                        { name: 'Rotavirus', recommended: '6-14 weeks' }
+                      ].map((vaccine) => (
+                        <div key={vaccine.name} className="flex items-center justify-between">
+                          <div className="flex items-center flex-1">
+                            <input
+                              type="checkbox"
+                              id={`vaccine-${vaccine.name}`}
+                              checked={vaccinations[vaccine.name] || false}
+                              onChange={() => handleVaccinationToggle(vaccine.name)}
+                              className="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+                            />
+                            <label htmlFor={`vaccine-${vaccine.name}`} className="ml-2 text-sm text-gray-900">
+                              {vaccine.name}
+                            </label>
+                          </div>
+                          <span className="text-xs text-gray-500">{vaccine.recommended}</span>
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  </div>
+              
+                  {/* 15 months to 6 years */}
+                  <div className="border-l-4 border-green-200 pl-4">
+                    <h4 className="text-sm font-semibold text-gray-700 mb-2">15 Months to 6 Years</h4>
+                    <div className="space-y-2">
+                      {[
+                        { name: 'MMR', recommended: '12-15 months' },
+                        { name: 'Chickenpox', recommended: '12-15 months' },
+                        { name: 'Hepatitis A', recommended: '12-23 months' },
+                        { name: 'DTaP', recommended: '15-18 months' },
+                        { name: 'Pneumococcal', recommended: '4-6 years' }
+                      ].map((vaccine) => (
+                        <div key={vaccine.name} className="flex items-center justify-between">
+                          <div className="flex items-center flex-1">
+                            <input
+                              type="checkbox"
+                              id={`vaccine-${vaccine.name}`}
+                              checked={vaccinations[vaccine.name] || false}
+                              onChange={() => handleVaccinationToggle(vaccine.name)}
+                              className="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+                            />
+                            <label htmlFor={`vaccine-${vaccine.name}`} className="ml-2 text-sm text-gray-900">
+                              {vaccine.name}
+                            </label>
+                          </div>
+                          <span className="text-xs text-gray-500">{vaccine.recommended}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </Section>
             </div>

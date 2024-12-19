@@ -1,4 +1,8 @@
 import React from 'react';
+import chaturath from '../assets/chaturath.jpg';
+import helpage from '../assets/helpage.png';
+import swasth from '../assets/swasth.jpg';
+import  Antara from '../assets/antara.jpg'
 
 const NGO = () => {
   return (
@@ -11,7 +15,7 @@ const NGO = () => {
           id="home"
           className="text-center py-32 bg-gradient-to-b from-blue-50 to-blue-100 text-gray-800"
         >
-          <img src="NGO.png" alt="NGO" className="mx-auto h-32 w-32" />
+          <img src="/NGO.png" alt="NGO" className="mx-auto h-32 w-32" />
           <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">
             Non-Governmental Organizations
           </h1>
@@ -35,7 +39,7 @@ const NGO = () => {
             <div className="bg-gray-100 hover:bg-blue-50 p-6 rounded-lg transition">
               <div className="mb-4">
                 <img
-                  src="helpage.png"
+                  src= {helpage}
                   alt="HelpAge India"
                   className="h-32 w-32 mx-auto"
                 />
@@ -64,7 +68,7 @@ const NGO = () => {
             <div className="bg-gray-100 hover:bg-blue-50 p-6 rounded-lg transition">
               <div className="mb-4">
                 <img
-                  src="antara.jpg"
+                  src={Antara}
                   alt="Antara Foundation"
                   className="h-24 w-36 mx-auto"
                 />
@@ -93,7 +97,7 @@ const NGO = () => {
             <div className="bg-gray-100 hover:bg-blue-50 p-6 rounded-lg transition">
               <div className="mb-4">
                 <img
-                  src="swasth2.png"
+                  src={swasth}
                   alt="Swasth Foundation"
                   className="h-24 w-48 mx-auto"
                 />
@@ -120,6 +124,12 @@ const NGO = () => {
           <div className="container relative w-1/2 ml-auto pl-8 py-10">
             <div className="absolute top-10 left-[-10px] w-4 h-4 bg-white border-4 border-blue-500 rounded-full"></div>
             <div className="bg-gray-100 hover:bg-blue-50 p-6 rounded-lg transition">
+            <img
+                  src= {chaturath}
+                  alt="Swasth Foundation"
+                  className="h-26 w-48 mx-auto"
+                />
+
               <h2 className="text-2xl font-bold text-blue-500 mb-2 text-center">
                 Charutar Arogya Mandal
               </h2>
