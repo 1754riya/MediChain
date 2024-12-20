@@ -55,17 +55,21 @@ export function Navbar() {
     }
   };
 
-  const UserAvatar = () => (
+  const UserAvatar = () => {
+    const [imageError, setImageError] = useState(false);
+
+    return (
     <div className="relative">
       <button
         onClick={() => setMenuOpen(!menuOpen)}
         className="flex items-center justify-center w-10 h-10 rounded-full focus:outline-none overflow-hidden"
       >
-        {currentUser?.photoURL ? (
+        {currentUser?.photoURL && !imageError ? (
           <img 
             src={currentUser.photoURL}
             alt="Profile"
             className="w-full h-full object-cover"
+            onError={() => setImageError(true)}
           />
         ) : (
           <div className="w-full h-full bg-blue-500 flex items-center justify-center text-white">
@@ -108,7 +112,7 @@ export function Navbar() {
         </div>
       )}
     </div>
-  );
+  )};
 
   return (
     <nav className="bg-white border-b border-gray-200 z-50 fixed w-full top-0 left-0">
