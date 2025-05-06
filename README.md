@@ -1,7 +1,9 @@
 
-## MediChain
+## MediChain -Doctor Appointment & Medical Record System
 
-MediChain is an Online Healthcare Appointment, NGO Connection & Child Vaccination Tracking Platform built to streamline healthcare access and delivery. The platform features dedicated dashboards for Doctors and Patients, ensuring transparency, efficiency, and support for underserved communities.
+MediChain is an online healthcare platform designed to streamline access and delivery through features like appointment booking, NGO integration, and child vaccination tracking. Built with the goal of supporting underserved communities, MediChain offers dedicated dashboards for both doctors and patients, promoting transparency, efficiency, and targeted medical aid. By securely managing data and fostering collaboration between patients, healthcare providers, and NGOs, MediChain bridges critical gaps in healthcare with a user-friendly, purpose-driven solution.
+
+
 ## Tech Stack 
     💻 Frontend: React, HTML, CSS, JavaScript, Tailwind CSS
 
