@@ -47,7 +47,7 @@ MediChain is an Online Healthcare Appointment, NGO Connection & Child Vaccinatio
 
     npm start
 
-##Video:
+## Visuals:
 
 https://github.com/user-attachments/assets/be572fb3-8c77-47e8-a9a6-5b8f8ae492f8
 
